@@ -91,8 +91,6 @@
 <div class="container" id="mainContainer">
     <div class="logos-header">
         <img src="buro1.jpg" alt="Logo ADS" class="logo-item">
-        
-        <img src="anuncios.jpeg"alt="Buró de Crédito" class="logo-item">
     </div>
 
     <div class="brand-header">
